@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfRoto6App.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfRoto6App"
+        mc:Ignorable="d"
+        Title="MainMenu" Height="1000" Width="1500">
+    <Grid>
+        <Button x:Name="Roto6ControlBotton" 
+                Content="roto6管理" 
+                HorizontalAlignment="Left" 
+                Margin="150,200,0,0" 
+                VerticalAlignment="Top" 
+                FontSize="30"
+                Width="250" 
+                Height="60" 
+                Click="Roto6_Control_Botton"/>
+
+        <Button x:Name="ForecastNumberBotton" 
+                Content="予想番号作成" 
+                HorizontalAlignment="Left" 
+                Margin="150,400,0,0" 
+                VerticalAlignment="Top" 
+                FontSize="30"
+                Width="250" 
+                Height="60" 
+                Click="Forecast_Number_Botton"/>
+
+        <Button x:Name="TopReturnBotton" 
+                Content="TOPへ戻る" 
+                HorizontalAlignment="Left" 
+                Margin="150,600,0,0" 
+                VerticalAlignment="Top" 
+                FontSize="30"
+                Width="250" 
+                Height="60" 
+                Click="Top_Return_Botton"/>
+
+        <Label Margin="500,200,0,0" FontSize="40" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <TextBlock RenderTransformOrigin="3.659,47.141">
+                <Underline>過去のroto6の一覧を表示、登録、削除を行う画面</Underline>
+            </TextBlock>
+        </Label>
+
+        <Label Margin="500,400,0,0" FontSize="40" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <TextBlock RenderTransformOrigin="3.659,47.141">
+                <Underline>次回のroto6の番号を予想する画面</Underline>
+            </TextBlock>
+        </Label>
+        
+        <Label Margin="500,600,0,0" FontSize="40" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <TextBlock>
+                <Underline>TOP画面へ戻る</Underline>
+            </TextBlock>
+        </Label>
+
+    </Grid>
+</Window>

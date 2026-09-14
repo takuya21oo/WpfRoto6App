@@ -1,0 +1,37 @@
+﻿<Window x:Class="WpfRoto6App.Top"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfRoto6App"
+        mc:Ignorable="d"
+        Title="Top" Height="1000" Width="1500">
+    <Grid>
+        <Label Content="ROTO6アプリ" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Top" 
+               RenderTransformOrigin="-1.943,-4.775" 
+               FontSize="100" 
+               FontWeight="Bold" Margin="0,295,0,0" />
+
+        <Button x:Name="StartBotton" 
+                Content="START" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="367,649,0,0" 
+                FontSize="30" 
+                Width="250" 
+                Height="60"
+                Click="Start_Botton" />
+
+        <Button x:Name="EndBotton" 
+                Content="END" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="894,649,0,0" 
+                FontSize="30" 
+                Width="250" 
+                Height="60"
+                Click="End_Botton" />
+    </Grid>
+</Window>

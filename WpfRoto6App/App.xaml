@@ -1,0 +1,9 @@
+﻿<Application x:Class="WpfRoto6App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfRoto6App"
+             StartupUri="Top.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

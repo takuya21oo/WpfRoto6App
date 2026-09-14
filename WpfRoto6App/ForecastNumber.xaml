@@ -1,0 +1,93 @@
+﻿<Window x:Class="WpfRoto6App.ForecastNumber"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfRoto6App"
+        mc:Ignorable="d"
+        Title="ForecastNumber" Height="1000" Width="1500">
+
+    <Window.Resources>
+        <!-- セル内のテキストを中央揃え -->
+        <Style x:Key="CenterCellTextStyle" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+        <!-- ヘッダーのテキストを中央揃え -->
+        <Style x:Key="CenterHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- セルそのものの水平配置を中央に（内容が TextBlock 以外のときも有効） -->
+        <Style x:Key="CenterCellStyle" TargetType="DataGridCell">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Label Content="CREATE  NUMBER..." 
+            VerticalAlignment="Top"  
+            Margin="0,83,0,0" 
+            FontWeight="Bold" 
+            FontSize="50" 
+            Foreground="#FF1E29D6" 
+            HorizontalAlignment="Center" 
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center" 
+            UseLayoutRounding="False"/>
+
+        <Button Content="メインメニューへ戻る" 
+                HorizontalAlignment="Left" 
+                Margin="20,20,0,0" 
+                VerticalAlignment="Top" 
+                FontSize="15"
+                Height="30" 
+                Width="200"
+                Click="Mainmenu_Return_Botton"/>
+
+        <!--ObservableCollection<NewRotoInfo>のListの変数名をバインディングする-->
+        <DataGrid x:Name="dataGrid"
+                  LoadingRow="dataGrid_LoadingRow"
+                  ItemsSource="{Binding CreateRotoNumber}" 
+                  AutoGenerateColumns="False" 
+                  FontSize="25" 
+                  ColumnHeaderHeight="50"
+                  RowHeight="40"
+                  ColumnWidth="200"
+                  CellStyle="{StaticResource CenterCellStyle}"
+                  Margin="120,165,120,110"
+                  AlternatingRowBackground="LightGray"
+                  RowBackground="White">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="本数字①" Binding="{Binding FirstNum}" 
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字②" Binding="{Binding SecondNum}" 
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字③" Binding="{Binding ThirdNum}" 
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字④" Binding="{Binding FourthNum}" 
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字⑤" Binding="{Binding FifthNum}" 
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字⑥" Binding="{Binding SixthNum}" 
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Content="作成" 
+                HorizontalAlignment="Center" 
+                Margin="0,890,0,10" 
+                VerticalAlignment="Top"  
+                FontSize="30"
+                Height="40" 
+                Width="250"
+                Click="AddButton_Click"/>
+
+    </Grid>
+</Window>

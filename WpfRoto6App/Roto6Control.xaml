@@ -1,0 +1,182 @@
+﻿<Window x:Class="WpfRoto6App.Roto6Control"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfRoto6App"
+        mc:Ignorable="d"
+        Title="Roto6Control" Height="1000" Width="1500">
+
+    <Window.Resources>
+        <!-- セル内のテキストを中央揃え -->
+        <Style x:Key="CenterCellTextStyle" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+        <!-- ヘッダーのテキストを中央揃え -->
+        <Style x:Key="CenterHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- セルそのものの水平配置を中央に（内容が TextBlock 以外のときも有効） -->
+        <Style x:Key="CenterCellStyle" TargetType="DataGridCell">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Calendar のスタイル -->
+        <Style x:Key="LargeCalendarStyle" TargetType="Calendar">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="CalendarDayButtonStyle">
+                <Setter.Value>
+                    <Style TargetType="CalendarDayButton">
+                        <Setter Property="MinWidth" Value="50"/>
+                        <Setter Property="MinHeight" Value="50"/>
+                        <Setter Property="FontSize" Value="25"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Button Content="メインメニューへ戻る" 
+                HorizontalAlignment="Left" 
+                Margin="20,20,0,0" 
+                VerticalAlignment="Top" 
+                FontSize="15"
+                Height="30" 
+                Width="200"
+                Click="Mainmenu_Return_Botton"/>
+
+        <Grid Margin="150,80,150,660" 
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Width="Auto"
+              Height="Auto">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 回別 -->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,5">
+                <Label Content="回別：" Width="110" FontSize="25"/>
+                <TextBox x:Name="txtRound" Width="1020" FontSize="25" InputScope="Number" PreviewTextInput="TextBox_PreviewTextInput" />
+            </StackPanel>
+
+            <!-- 抽選日 -->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,5">
+                <Label Content="抽選日：" Width="110" FontSize="25"/>
+                <DatePicker x:Name="dpDate" GotFocus="dpDate_GotFocus" PreviewTextInput="dpDate_PreviewTextInput" Width="1020" FontSize="25" CalendarStyle="{StaticResource LargeCalendarStyle}"/>
+            </StackPanel>
+
+            <!-- 本数字 -->
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,5">
+                <Label Content="本数字：" Width="110" FontSize="25"/>
+                <TextBox x:Name="txtNum1" Width="110" Margin="2" FontSize="25" InputScope="Number" PreviewTextInput="TextBox_PreviewTextInput" />
+                <TextBox x:Name="txtNum2" Width="110" Margin="2" FontSize="25" InputScope="Number" PreviewTextInput="TextBox_PreviewTextInput" />
+                <TextBox x:Name="txtNum3" Width="110" Margin="2" FontSize="25" InputScope="Number" PreviewTextInput="TextBox_PreviewTextInput" />
+                <TextBox x:Name="txtNum4" Width="110" Margin="2" FontSize="25" InputScope="Number" PreviewTextInput="TextBox_PreviewTextInput" />
+                <TextBox x:Name="txtNum5" Width="110" Margin="2" FontSize="25" InputScope="Number" PreviewTextInput="TextBox_PreviewTextInput" />
+                <TextBox x:Name="txtNum6" Width="110" Margin="2" FontSize="25" InputScope="Number" PreviewTextInput="TextBox_PreviewTextInput" />
+            </StackPanel>
+
+            <!-- ボーナス数字 -->
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,5">
+                <Label Content="ボーナス：" Width="110" FontSize="25"/>
+                <TextBox x:Name="txtBonus" Width="110" FontSize="25" InputScope="Number" PreviewTextInput="TextBox_PreviewTextInput" />
+            </StackPanel>
+            
+        </Grid>
+        
+        <Button Content="表示" 
+                Command="{Binding SearchCommand}"
+                HorizontalAlignment="Left" 
+                Margin="890,328,0,0" 
+                VerticalAlignment="Top"  
+                FontSize="20"
+                Height="32" 
+                Width="110" />
+
+        <!--Click="DisplayButton_Click"-->
+
+        <Button Content="登録"
+                Click="RegisterButton_Click"
+                HorizontalAlignment="Left" 
+                Margin="1030,328,0,0" 
+                VerticalAlignment="Top"  
+                FontSize="20"
+                Height="32" 
+                Width="110" />
+        
+        <Button Content="クリア" 
+                HorizontalAlignment="Left" 
+                Margin="1170,328,0,0" 
+                VerticalAlignment="Top"  
+                FontSize="20"
+                Height="32" 
+                Width="110"
+                Click="ClearButton_Click"/>
+
+        <!--ObservableCollection<NewRotoInfo>のListの変数名をバインディングする-->
+        <DataGrid ItemsSource="{Binding Roto6InfoDto}" 
+                  AutoGenerateColumns="False" 
+                  FontSize="18" 
+                  ColumnHeaderHeight="35"
+                  RowHeight="35"
+                  ColumnWidth="126"
+                  CellStyle="{StaticResource CenterCellStyle}"
+                  Margin="108,380,108,60" 
+                  AlternatingRowBackground="LightGray"
+                  RowBackground="White" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="回別" Binding="{Binding Roto6No}" Width="100" 
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="抽選日" Binding="{Binding ReleaseDate, StringFormat='yyyy/MM/dd'}" Width="190"
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字①" Binding="{Binding FirstNum}" Width="115"
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字②" Binding="{Binding SecondNum}" Width="115"
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字③" Binding="{Binding ThirdNum}" Width="115"
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字④" Binding="{Binding FourthNum}" Width="115"
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字⑤" Binding="{Binding FifthNum}" Width="115"
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="本数字⑥" Binding="{Binding SixthNum}" Width="115"
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTextColumn Header="ボーナス数字" Binding="{Binding BonusNum}" Width="130"
+                                    ElementStyle="{StaticResource CenterCellTextStyle}"
+                                    HeaderStyle="{StaticResource CenterHeaderStyle}" />
+                <DataGridTemplateColumn Header="削除" Width="130" 
+                                        HeaderStyle="{StaticResource CenterHeaderStyle}" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="削除"
+                                    Tag="{Binding}"
+                                    Click="DeleteButton_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        
+
+    </Grid>
+</Window>
